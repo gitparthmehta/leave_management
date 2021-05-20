@@ -18,19 +18,17 @@ class ViewKRAScreen extends StatefulWidget {
 class _ViewKRAScreen extends State<ViewKRAScreen> {
   String token = "";
   String user_id = "";
-  String employee_name = "";
   ViewKRABloc _viewTaskBloc = ViewKRABloc();
   bool isloading = true;
   bool showlist = false;
-  List<ViewKRA> _viewTaskdata = [];
-
+  List<ViewKRA> _viewTaskdata =[];
+  ViewKRA viewkra;
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-        child: Scaffold(
+    return WillPopScope(onWillPop: _onBackPressed,
+      child: Scaffold(
           appBar: AppBar(
             title: Text("View KRA"),
-            backgroundColor: Colors.grey[300],
             leading: IconButton(
               icon: Icon(
                 Icons.arrow_back,
@@ -40,67 +38,543 @@ class _ViewKRAScreen extends State<ViewKRAScreen> {
               },
             ),
           ),
-            body: isloading
-                ? Center(child: CircularProgressIndicator())
-                : Scaffold(
-              body: Form(
-                child: Stack(
-                  children: <Widget>[
-                    Container(
-                      padding:
-                      new EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
-                      height: double.infinity,
-                      child: SingleChildScrollView(
-                        physics: AlwaysScrollableScrollPhysics(),
-                        child: Column(
-                            crossAxisAlignment:
-                            CrossAxisAlignment.stretch,
-                          children: <Widget>[
-                            SizedBox(height: 10.0),
-                            TextView(
-                              "EMPLOYEE NAME",
-                              fontFamily: 'Poppins-SemiBold',
-                              fontSize: 14,
-                              textAlign: TextAlign.left,
-                              textColor: Colors.black,
-                              fontWeight: FontWeight.bold,
+          body: isloading
+              ? Center(child: CircularProgressIndicator())
+              : Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Visibility(
+                  visible: showlist,
+                  child: Expanded(child: ListView.builder(
+                    padding: EdgeInsets.all(5),
+                    shrinkWrap: true,
+                    itemCount: _viewTaskdata.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return GestureDetector(
+                          child: Card(
+                            color: Colors.white,
+                            // elevation: 5,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                  width: MediaQuery.of(context).size.width,
+                                child:  Column(
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.stretch,
+                                  children: <Widget>[
+                                    SizedBox(height: 10.0),
+                                    TextView(
+                                      "EMPLOYEE NAME",
+                                      fontFamily: 'Poppins-SemiBold',
+                                      fontSize: 14,
+                                      textAlign: TextAlign.left,
+                                      textColor: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    SizedBox(height: 5.0),
+                                    Container(
+
+                                      padding: new EdgeInsets.fromLTRB(
+                                          5.0, 0.0, 5.0, 0.0),
+                                      decoration: new BoxDecoration(
+                                        shape: BoxShape.rectangle,
+                                        border: new Border.all(
+                                          width: 0.5,
+                                        ),
+                                      ),
+                                      child:  TextView(
+                                        _viewTaskdata[index].employee_name,
+                                        fontFamily: 'Poppins-SemiBold',
+                                        fontSize: 13,
+                                        textAlign: TextAlign.left,
+                                        textColor: Colors.black,
+                                        fontWeight: FontWeight.normal,
+
+                                      ),
+                                      height: 35,
+                                      alignment: Alignment.centerLeft,
+                                    ),
+                                    SizedBox(height: 10.0),
+                                    TextView(
+                                      "Finacial Year",
+                                      fontFamily: 'Poppins-SemiBold',
+                                      fontSize: 14,
+                                      textAlign: TextAlign.left,
+                                      textColor: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    SizedBox(height: 5.0),
+                                    Container(
+
+                                      padding: new EdgeInsets.fromLTRB(
+                                          5.0, 0.0, 5.0, 0.0),
+                                      decoration: new BoxDecoration(
+                                        shape: BoxShape.rectangle,
+                                        border: new Border.all(
+                                          width: 0.5,
+                                        ),
+                                      ),
+                                      child:  TextView(
+                                        _viewTaskdata[index].finacial_year,
+                                        fontFamily: 'Poppins-SemiBold',
+                                        fontSize: 13,
+                                        textAlign: TextAlign.left,
+                                        textColor: Colors.black,
+                                        fontWeight: FontWeight.normal,
+
+                                      ),
+                                      height: 35,
+                                      alignment: Alignment.centerLeft,
+                                    ),
+                                    SizedBox(height: 10.0),
+                                    TextView(
+                                      "KRA Salary",
+                                      fontFamily: 'Poppins-SemiBold',
+                                      fontSize: 14,
+                                      textAlign: TextAlign.left,
+                                      textColor: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    SizedBox(height: 5.0),
+                                    Container(
+
+                                      padding: new EdgeInsets.fromLTRB(
+                                          5.0, 0.0, 5.0, 0.0),
+                                      decoration: new BoxDecoration(
+                                        shape: BoxShape.rectangle,
+                                        border: new Border.all(
+                                          width: 0.5,
+                                        ),
+                                      ),
+                                      child:  TextView(
+                                        _viewTaskdata[index].kra_salary,
+                                        fontFamily: 'Poppins-SemiBold',
+                                        fontSize: 13,
+                                        textAlign: TextAlign.left,
+                                        textColor: Colors.black,
+                                        fontWeight: FontWeight.normal,
+
+                                      ),
+                                      height: 35,
+                                      alignment: Alignment.centerLeft,
+                                    ),
+                                    SizedBox(height: 10.0),
+                                    TextView(
+                                      "Work Responsibility",
+                                      fontFamily: 'Poppins-SemiBold',
+                                      fontSize: 14,
+                                      textAlign: TextAlign.left,
+                                      textColor: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    SizedBox(height: 5.0),
+                                    Container(
+
+                                      padding: new EdgeInsets.fromLTRB(
+                                          5.0, 0.0, 5.0, 0.0),
+                                      decoration: new BoxDecoration(
+                                        shape: BoxShape.rectangle,
+                                        border: new Border.all(
+                                          width: 0.5,
+                                        ),
+                                      ),
+                                      child:  TextView(
+                                        _viewTaskdata[index].work_responsibility,
+                                        fontFamily: 'Poppins-SemiBold',
+                                        fontSize: 13,
+                                        textAlign: TextAlign.left,
+                                        textColor: Colors.black,
+                                        fontWeight: FontWeight.normal,
+
+                                      ),
+                                      height: 35,
+                                      alignment: Alignment.centerLeft,
+                                    ),
+                                    SizedBox(height: 10.0),
+                                    TextView(
+                                      "Work Responsibility Feedback",
+                                      fontFamily: 'Poppins-SemiBold',
+                                      fontSize: 14,
+                                      textAlign: TextAlign.left,
+                                      textColor: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    SizedBox(height: 5.0),
+                                    Container(
+
+                                      padding: new EdgeInsets.fromLTRB(
+                                          5.0, 0.0, 5.0, 0.0),
+                                      decoration: new BoxDecoration(
+                                        shape: BoxShape.rectangle,
+                                        border: new Border.all(
+                                          width: 0.5,
+                                        ),
+                                      ),
+                                      child:  TextView(
+                                        _viewTaskdata[index].work_responsibility_feedback,
+                                        fontFamily: 'Poppins-SemiBold',
+                                        fontSize: 13,
+                                        textAlign: TextAlign.left,
+                                        textColor: Colors.black,
+                                        fontWeight: FontWeight.normal,
+
+                                      ),
+                                      height: 35,
+                                      alignment: Alignment.centerLeft,
+                                    ),
+                                    SizedBox(height: 10.0),
+                                    TextView(
+                                      "Company Behaviour",
+                                      fontFamily: 'Poppins-SemiBold',
+                                      fontSize: 14,
+                                      textAlign: TextAlign.left,
+                                      textColor: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    SizedBox(height: 5.0),
+                                    Container(
+
+                                      padding: new EdgeInsets.fromLTRB(
+                                          5.0, 0.0, 5.0, 0.0),
+                                      decoration: new BoxDecoration(
+                                        shape: BoxShape.rectangle,
+                                        border: new Border.all(
+                                          width: 0.5,
+                                        ),
+                                      ),
+                                      child:  TextView(
+                                        _viewTaskdata[index].com_behaviour,
+                                        fontFamily: 'Poppins-SemiBold',
+                                        fontSize: 13,
+                                        textAlign: TextAlign.left,
+                                        textColor: Colors.black,
+                                        fontWeight: FontWeight.normal,
+
+                                      ),
+                                      height: 35,
+                                      alignment: Alignment.centerLeft,
+                                    ),
+                                    SizedBox(height: 10.0),
+                                    TextView(
+                                      "Company Behaviour Feedback",
+                                      fontFamily: 'Poppins-SemiBold',
+                                      fontSize: 14,
+                                      textAlign: TextAlign.left,
+                                      textColor: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    SizedBox(height: 5.0),
+                                    Container(
+
+                                      padding: new EdgeInsets.fromLTRB(
+                                          5.0, 0.0, 5.0, 0.0),
+                                      decoration: new BoxDecoration(
+                                        shape: BoxShape.rectangle,
+                                        border: new Border.all(
+                                          width: 0.5,
+                                        ),
+                                      ),
+                                      child:  TextView(
+                                        _viewTaskdata[index].comp_feedback,
+                                        fontFamily: 'Poppins-SemiBold',
+                                        fontSize: 13,
+                                        textAlign: TextAlign.left,
+                                        textColor: Colors.black,
+                                        fontWeight: FontWeight.normal,
+
+                                      ),
+                                      height: 35,
+                                      alignment: Alignment.centerLeft,
+                                    ),
+                                    SizedBox(height: 10.0),
+                                    TextView(
+                                      "Team Player",
+                                      fontFamily: 'Poppins-SemiBold',
+                                      fontSize: 14,
+                                      textAlign: TextAlign.left,
+                                      textColor: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    SizedBox(height: 5.0),
+                                    Container(
+
+                                      padding: new EdgeInsets.fromLTRB(
+                                          5.0, 0.0, 5.0, 0.0),
+                                      decoration: new BoxDecoration(
+                                        shape: BoxShape.rectangle,
+                                        border: new Border.all(
+                                          width: 0.5,
+                                        ),
+                                      ),
+                                      child:  TextView(
+                                        _viewTaskdata[index].team_player,
+                                        fontFamily: 'Poppins-SemiBold',
+                                        fontSize: 13,
+                                        textAlign: TextAlign.left,
+                                        textColor: Colors.black,
+                                        fontWeight: FontWeight.normal,
+
+                                      ),
+                                      height: 35,
+                                      alignment: Alignment.centerLeft,
+                                    ),
+                                    SizedBox(height: 10.0),
+                                    TextView(
+                                      "Team Player Feedback",
+                                      fontFamily: 'Poppins-SemiBold',
+                                      fontSize: 14,
+                                      textAlign: TextAlign.left,
+                                      textColor: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    SizedBox(height: 5.0),
+                                    Container(
+
+                                      padding: new EdgeInsets.fromLTRB(
+                                          5.0, 0.0, 5.0, 0.0),
+                                      decoration: new BoxDecoration(
+                                        shape: BoxShape.rectangle,
+                                        border: new Border.all(
+                                          width: 0.5,
+                                        ),
+                                      ),
+                                      child:  TextView(
+                                        _viewTaskdata[index].team_player_feed_back,
+                                        fontFamily: 'Poppins-SemiBold',
+                                        fontSize: 13,
+                                        textAlign: TextAlign.left,
+                                        textColor: Colors.black,
+                                        fontWeight: FontWeight.normal,
+
+                                      ),
+                                      height: 35,
+                                      alignment: Alignment.centerLeft,
+                                    ),
+                                    SizedBox(height: 10.0),
+                                    TextView(
+                                      "Task Delivery",
+                                      fontFamily: 'Poppins-SemiBold',
+                                      fontSize: 14,
+                                      textAlign: TextAlign.left,
+                                      textColor: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    SizedBox(height: 5.0),
+                                    Container(
+
+                                      padding: new EdgeInsets.fromLTRB(
+                                          5.0, 0.0, 5.0, 0.0),
+                                      decoration: new BoxDecoration(
+                                        shape: BoxShape.rectangle,
+                                        border: new Border.all(
+                                          width: 0.5,
+                                        ),
+                                      ),
+                                      child:  TextView(
+                                        _viewTaskdata[index].task_delivery,
+                                        fontFamily: 'Poppins-SemiBold',
+                                        fontSize: 13,
+                                        textAlign: TextAlign.left,
+                                        textColor: Colors.black,
+                                        fontWeight: FontWeight.normal,
+
+                                      ),
+                                      height: 35,
+                                      alignment: Alignment.centerLeft,
+                                    ),
+                                    SizedBox(height: 10.0),
+                                    TextView(
+                                      "Task Delivery Feedback",
+                                      fontFamily: 'Poppins-SemiBold',
+                                      fontSize: 14,
+                                      textAlign: TextAlign.left,
+                                      textColor: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    SizedBox(height: 5.0),
+                                    Container(
+
+                                      padding: new EdgeInsets.fromLTRB(
+                                          5.0, 0.0, 5.0, 0.0),
+                                      decoration: new BoxDecoration(
+                                        shape: BoxShape.rectangle,
+                                        border: new Border.all(
+                                          width: 0.5,
+                                        ),
+                                      ),
+                                      child:  TextView(
+                                        _viewTaskdata[index].task_delivery_feedback,
+                                        fontFamily: 'Poppins-SemiBold',
+                                        fontSize: 13,
+                                        textAlign: TextAlign.left,
+                                        textColor: Colors.black,
+                                        fontWeight: FontWeight.normal,
+
+                                      ),
+                                      height: 35,
+                                      alignment: Alignment.centerLeft,
+                                    ),
+                                    SizedBox(height: 10.0),
+                                    TextView(
+                                      "KRA Percentage",
+                                      fontFamily: 'Poppins-SemiBold',
+                                      fontSize: 14,
+                                      textAlign: TextAlign.left,
+                                      textColor: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    SizedBox(height: 5.0),
+                                    Container(
+
+                                      padding: new EdgeInsets.fromLTRB(
+                                          5.0, 0.0, 5.0, 0.0),
+                                      decoration: new BoxDecoration(
+                                        shape: BoxShape.rectangle,
+                                        border: new Border.all(
+                                          width: 0.5,
+                                        ),
+                                      ),
+                                      child:  TextView(
+                                        _viewTaskdata[index].kra_per,
+                                        fontFamily: 'Poppins-SemiBold',
+                                        fontSize: 13,
+                                        textAlign: TextAlign.left,
+                                        textColor: Colors.black,
+                                        fontWeight: FontWeight.normal,
+
+                                      ),
+                                      height: 35,
+                                      alignment: Alignment.centerLeft,
+                                    ),
+                                    SizedBox(height: 10.0),
+                                    TextView(
+                                      "KRA Salary with Performance",
+                                      fontFamily: 'Poppins-SemiBold',
+                                      fontSize: 14,
+                                      textAlign: TextAlign.left,
+                                      textColor: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    SizedBox(height: 5.0),
+                                    Container(
+
+                                      padding: new EdgeInsets.fromLTRB(
+                                          5.0, 0.0, 5.0, 0.0),
+                                      decoration: new BoxDecoration(
+                                        shape: BoxShape.rectangle,
+                                        border: new Border.all(
+                                          width: 0.5,
+                                        ),
+                                      ),
+                                      child:  TextView(
+                                        _viewTaskdata[index].kra_salary_with_performance,
+                                        fontFamily: 'Poppins-SemiBold',
+                                        fontSize: 13,
+                                        textAlign: TextAlign.left,
+                                        textColor: Colors.black,
+                                        fontWeight: FontWeight.normal,
+
+                                      ),
+                                      height: 35,
+                                      alignment: Alignment.centerLeft,
+                                    ),
+                                    SizedBox(height: 10.0),
+                                    TextView(
+                                      "Total",
+                                      fontFamily: 'Poppins-SemiBold',
+                                      fontSize: 14,
+                                      textAlign: TextAlign.left,
+                                      textColor: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    SizedBox(height: 5.0),
+                                    Container(
+
+                                      padding: new EdgeInsets.fromLTRB(
+                                          5.0, 0.0, 5.0, 0.0),
+                                      decoration: new BoxDecoration(
+                                        shape: BoxShape.rectangle,
+                                        border: new Border.all(
+                                          width: 0.5,
+                                        ),
+                                      ),
+                                      child:  TextView(
+                                        _viewTaskdata[index].total,
+                                        fontFamily: 'Poppins-SemiBold',
+                                        fontSize: 13,
+                                        textAlign: TextAlign.left,
+                                        textColor: Colors.black,
+                                        fontWeight: FontWeight.normal,
+
+                                      ),
+                                      height: 35,
+                                      alignment: Alignment.centerLeft,
+                                    ),
+                                    SizedBox(height: 10.0),
+                                    TextView(
+                                      "Final KRA Salary",
+                                      fontFamily: 'Poppins-SemiBold',
+                                      fontSize: 14,
+                                      textAlign: TextAlign.left,
+                                      textColor: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    SizedBox(height: 5.0),
+                                    Container(
+
+                                      padding: new EdgeInsets.fromLTRB(
+                                          5.0, 0.0, 5.0, 0.0),
+                                      decoration: new BoxDecoration(
+                                        shape: BoxShape.rectangle,
+                                        border: new Border.all(
+                                          width: 0.5,
+                                        ),
+                                      ),
+                                      child:  TextView(
+                                        _viewTaskdata[index].final_kra_salary,
+                                        fontFamily: 'Poppins-SemiBold',
+                                        fontSize: 13,
+                                        textAlign: TextAlign.left,
+                                        textColor: Colors.black,
+                                        fontWeight: FontWeight.normal,
+
+                                      ),
+                                      height: 35,
+                                      alignment: Alignment.centerLeft,
+                                    ),
+                                  ],
+                                ),
+                         ),
                             ),
-                            SizedBox(height: 5.0),
-                        Container(
+                          ));
+                    },
+                  ))),
 
-                          padding: new EdgeInsets.fromLTRB(
-                              5.0, 0.0, 5.0, 0.0),
-                          decoration: new BoxDecoration(
-                            shape: BoxShape.rectangle,
-                            border: new Border.all(
-                              width: 0.5,
-                            ),
-                          ),
-                          child:  TextView(
-                            _viewTaskdata[0].employee_name,
-                            fontFamily: 'Poppins-SemiBold',
-                            fontSize: 13,
-                            textAlign: TextAlign.left,
-                            textColor: Colors.black,
-                            fontWeight: FontWeight.normal,
 
-                          ),
-                          height: 35,
-                          alignment: Alignment.centerLeft,
+              Visibility(
+                  visible: showlist == false,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Center(
+                        child: TextView(
+                          "No Data Found",
+                          fontFamily: 'Poppins-SemiBold',
+                          fontSize: 18,
+                          textAlign: TextAlign.center,
+                          fontWeight: FontWeight.bold,
+                          textColor: Colors.cyan,
                         ),
-
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            )),
-
-        onWillPop: _onBackPressed);
+                      )
+                    ],
+                  ))
+            ],
+          )
+      ),
+    );
   }
-
   @override
   void initState() {
     _getPrefValue();
@@ -127,9 +601,9 @@ class _ViewKRAScreen extends State<ViewKRAScreen> {
               backgroundColor: Colors.red,
               textColor: Colors.white,
               fontSize: 16.0);
-          isloading = false;
-          showlist = false;
           _viewTaskdata = value.data.Result.viewkra;
+          showlist = false;
+
         } else {
           showlist = true;
           _viewTaskdata = value.data.Result.viewkra;

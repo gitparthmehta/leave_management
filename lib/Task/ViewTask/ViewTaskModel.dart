@@ -47,7 +47,8 @@ class ViewTask {
   String task_status;
   String task_status_id;
   String task_per;
-  String attechment;
+  String project_name;
+  // String attechment;
 
   ViewTask.fromJson(Map<String, dynamic> json) {
     taskid = json['taskid'];
@@ -68,7 +69,8 @@ class ViewTask {
     task_status = json['task_status'];
     task_status_id = json['task_status_id'];
     task_per = json['task_per'];
-    attechment = json['attechment'];
+    project_name = json['project_name'];
+    // attechment = json['attechment'];
   }
 
   Map<String, dynamic> toJson() =>
@@ -91,7 +93,8 @@ class ViewTask {
         "task_status": task_status,
         "task_status_id": task_status_id,
         "task_per": task_per,
-        "attechment": attechment,
+        "project_name": project_name,
+        // "attechment": attechment,
       };
 
 }

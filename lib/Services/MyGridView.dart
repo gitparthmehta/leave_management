@@ -7,6 +7,7 @@ import 'package:flutter_app/LeaveBalance/LeaveBalanceScreen.dart';
 import 'package:flutter_app/LeaveList/LeaveListScreen.dart';
 import 'package:flutter_app/Task/AddTaskScreen.dart';
 import 'package:flutter_app/Task/MyApp.dart';
+import 'package:flutter_app/Task/ViewTask/ViewTaskScreen.dart';
 import 'ServicesList.dart';
 
 class MyGridView extends StatelessWidget {
@@ -55,7 +56,7 @@ class MyGridView extends StatelessWidget {
           }else if("${item.servicename}"=="BirthDays"){
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BirthdayListScreen()));
           }else if("${item.servicename}"=="Task"){
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => AddTaskScreen()));
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ViewTaskScreen()));
             // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => AllUserListScreen()));
           }else if("${item.servicename}"=="kRA"){
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ViewKRAScreen()));

@@ -5,8 +5,8 @@ class ApiConstants {
   // static final String BASE_URL = "http://192.168.30.11:8040/pms/webservice/";
 
   //Live url
-  // static final String BASE_URL = "http://petacodes.com/payroll/webservice/";
-  static final String BASE_URL = "http://petacodes.com/payroll_dev/webservice/";
+  static final String BASE_URL = "http://petacodes.com/payroll/webservice/";
+  // static final String BASE_URL = "http://petacodes.com/payroll_dev/webservice/";
 
   //login
   static final String LOGIN = "login.php";
