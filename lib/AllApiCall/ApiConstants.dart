@@ -59,14 +59,14 @@ class ApiConstants {
 // View TAsk
   static final String VIEW_TASK = "view_task.php";
 
-
 // kra_employee
   static final String KRA_employee = "kra_employee_list.php";
 
-
-
 // Add KRA
   static final String ADD_KRA = "add_kra.php";
+
+// View KRA
+  static final String VIEW_KRA = "view_kra.php";
 
   // mobile number
   static final String MOBILE_NO = "mobile";
@@ -119,5 +119,5 @@ class ApiConstants {
   // cancle leave
 
   static final String LEAVEID = "leaveid";
-  static  String clickeduser_id = "";
+  static String clickeduser_id = "";
 }

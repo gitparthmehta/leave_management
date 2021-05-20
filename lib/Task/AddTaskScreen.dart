@@ -753,10 +753,12 @@ class _AddTaskScreen extends State<AddTaskScreenStates> {
   Future<void> _endselectDate(BuildContext context) async {
     DatePicker.showDatePicker(context,
         showTitleActions: true,
+
         minTime: DateTime(
             DateTime.now().year, DateTime.now().month, DateTime.now().day - 7),
         // maxTime: DateTime(2019, 6, 7),
         theme: DatePickerTheme(
+
             headerColor: Colors.cyan,
             backgroundColor: Colors.white,
             itemStyle: TextStyle(

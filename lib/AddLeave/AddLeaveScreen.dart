@@ -403,9 +403,6 @@ class _AddLeaveScreen extends State<AddLeaveScreen> {
       selected_list.add(0);
       // selected_list.add(0);
     }
-    // selected_list.add(0);
-    // selected_list.add(0);
-    // selected_list.add(0);
   }
 
   Widget getDropDown() {

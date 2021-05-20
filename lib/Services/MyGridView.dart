@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/AllUserList/AllUserListScreen.dart';
 import 'package:flutter_app/BithdayList/BirthdayListScreen.dart';
 import 'package:flutter_app/KRAManagement/ADDKRAScreen.dart';
+import 'package:flutter_app/KRAManagement/ViewKRAScreen.dart';
 import 'package:flutter_app/LeaveBalance/LeaveBalanceScreen.dart';
 import 'package:flutter_app/LeaveList/LeaveListScreen.dart';
 import 'package:flutter_app/Task/AddTaskScreen.dart';
@@ -57,7 +58,7 @@ class MyGridView extends StatelessWidget {
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => AddTaskScreen()));
             // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => AllUserListScreen()));
           }else if("${item.servicename}"=="kRA"){
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ADDKRAScreen()));
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ViewKRAScreen()));
           }
         },
         child: new Card(
